@@ -1,0 +1,15 @@
+name: My First WorkFlow
+
+on: push
+
+jobs:
+    first-job:
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout repo
+          uses: actions/checkout@v4
+        - name: List repo files
+          run: ls -ltra
+
+        - name: Executing Shell script
+          run: ./ascii-script.sh
