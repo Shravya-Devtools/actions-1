@@ -1,0 +1,42 @@
+name: Context Info Example
+
+on: 
+  push:
+  workflow_dispatch:
+
+jobs:
+  show-context-details:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Show Git Branch and Commit Info
+        run: |
+          echo "Ref: ${{ github.ref }}"
+          echo "Branch Name: ${GITHUB_REF#refs/heads/}"
+          echo "Commit Message: ${{ github.event.head_commit.message }}"
+
+      - name: Show Actor and Repository Info
+        run: |
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+
+      - name: Print Runner Info
+        run: |
+          echo "Runner OS: ${{ runner.os }}"
+          echo "Runner Name: ${{ runner.name }}"
+
+      - name: Show Job Info
+        run: |
+          echo "Job Status: ${{ job.status }}"
+          echo "Workflow Name: ${{ github.workflow }}"
+
+      - name: Check If Secret Exists
+        run: |
+          if [ -n "${{ secrets.MY_SECRET }}" ]; then
+            echo "Secret is available"
+          else
+            echo "Secret is not set"
+          fi
