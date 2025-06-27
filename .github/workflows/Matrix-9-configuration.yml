@@ -10,13 +10,13 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+        os: [ubuntu-latest, windows-latest] # Changed ubuntu-20.04 to ubuntu-latest
         image: [hello-world, alpine]
         exclude:
           - os: windows-latest
             image: alpine
         include:
-          - os: ubuntu-20.04
+          - os: ubuntu-latest # Changed ubuntu-20.04 to ubuntu-latest
             image: amd64/alpine
 
     runs-on: ${{ matrix.os }}
