@@ -1,0 +1,28 @@
+name: Conditional Jobs Example
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  always-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Hello
+        run: echo "This job always runs"
+
+  run-on-main:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Main Branch Job
+        run: echo "This job runs only on the main branch"
+
+  run-on-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dev Branch Job
+        run: echo "This job runs only on the dev branch"
