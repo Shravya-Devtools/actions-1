@@ -1,0 +1,23 @@
+name: Workflow Filters Example
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+      - 'src/**'
+      - 'README.md'
+
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+
+jobs:
+  show-filters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print trigger info
+        run: echo "Triggered by ${{ github.event_name }} on branch ${{ github.ref }}"
